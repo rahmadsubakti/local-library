@@ -1,0 +1,29 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}
+    {{ book.title }} -
+{% endblock title %}
+
+{% block content %}
+    <p>Title : {{ book.title }}</p>
+    <p>Author: 
+        {% for author in book.author.all %}
+        <a href = "{{ author.get_absolute_url }}">{{ author.name }}</a>{% if forloop.last %}{% else %},{% endif %}
+        {% endfor %}
+    </p>
+    <p>Genre:
+        {% for genre in book.genre.all %}
+        <a href = "{{ genre.get_absolute_url }}">{{ genre.name }}</a>{% if forloop.last %}{% else %},{% endif %}
+        {% endfor %}
+    </p>
+    <p>Language : {{ book.language }}</p>
+    <p style="text-align:justify">Description : {{ book.description }}</p>
+    <p>ISBN : {{ book.isbn }}</p>
+    <p>Total book : {{ book.quantity_all }}</p>
+    <p>Number of Book Available : {{ book.quantity_available }}
+
+    {% for book_inst in book.books.all %}
+        <p>{{ book_inst.id}}</p>
+    {% endfor %}
+
+{% endblock %}
